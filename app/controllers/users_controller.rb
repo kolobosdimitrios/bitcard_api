@@ -29,11 +29,23 @@ class UsersController < ApplicationController
 
     def create
 
-        user = User.new(user_params)
+        user = User.where(id: user_params[:id]).first
+        if user.nil?
 
-        if user.save
-            session[:user_id] = user.id
+            new_user = User.new(user_params)
+            if new_user.save
+                render json:{
+                    "status_code": 1,
+                    "description": "user created!",
+                    "data": new_user
+                }
+            end
         else
+            render json:{
+                "status_code": 2,
+                "description": "user already exists",
+                "data": user
+            }
         end
 
     end
