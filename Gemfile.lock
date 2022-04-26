@@ -56,8 +56,12 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    argon2-kdf (0.1.7)
     bcrypt (3.1.17)
     bindex (0.8.1)
+    blind_index (2.3.0)
+      activesupport (>= 5.2)
+      argon2-kdf (>= 0.1.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -72,6 +76,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    lockbox (0.6.8)
     loofah (2.16.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -150,9 +155,11 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  blind_index (~> 2.3)
   bootsnap (>= 1.4.2)
   byebug
   jbuilder (~> 2.7)
+  lockbox (~> 0.6.8)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rails (~> 6.0.4, >= 6.0.4.7)
