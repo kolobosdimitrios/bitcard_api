@@ -8,6 +8,6 @@
 
 User.destroy_all
 
-user1 = User.create(name: "Dimitris", surname: "Kolovos", username: "dimKol123", password_digest: "password_secure1", date_of_birth: "20/10/1998", address: "An. Stamou 4", email: "d.kolovos@test.com") 
-user2 = User.create(name: "Petros", surname: "Kolovos", username: "pkol1543", password_digest: "password_secure2", date_of_birth: "20/10/1973", address: "An. Stamou 5", email: "p.kolovos@test.com") 
-user3 = User.create(name: "Marios", surname: "Kolovos", username: "marKollll", password_digest: "password_secure3", date_of_birth: "20/10/2000", address: "An. Stamou 6", email: "m.kolovos@test.com") 
+user1 = User.create(name: "Dimitris", surname: "Kolovos", username: "dimKol123", user_id: "user_id_dev_1", date_of_birth: "20/10/1998", address: "An. Stamou 4", email: "d.kolovos@test.com") 
+user2 = User.create(name: "Petros", surname: "Kolovos", username: "pkol1543", user_id: "user_id_dev_2", date_of_birth: "20/10/1973", address: "An. Stamou 5", email: "p.kolovos@test.com") 
+user3 = User.create(name: "Marios", surname: "Kolovos", username: "marKollll", user_id: "user_id_dev_3", date_of_birth: "20/10/2000", address: "An. Stamou 6", email: "m.kolovos@test.com") 
