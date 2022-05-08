@@ -10,6 +10,7 @@ class Api::V1::UsersController < ApplicationController
     # Handle exception in database
     begin
       user.save
+      render :json => "User Created successfully"
     rescue ActiveRecord::RecordNotUnique
       render :json => "Cannot save user"
     rescue ActiveRecord::NotNullViolation
