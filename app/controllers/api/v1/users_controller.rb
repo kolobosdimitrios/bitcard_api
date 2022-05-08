@@ -12,6 +12,8 @@ class Api::V1::UsersController < ApplicationController
       user.save
     rescue ActiveRecord::RecordNotUnique
       render :json => "Cannot save user"
+    rescue ActiveRecord::NotNullViolation
+      render :json => "Cannot save user"
     end
 
 
