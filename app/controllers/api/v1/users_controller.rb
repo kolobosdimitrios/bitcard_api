@@ -7,11 +7,14 @@ class Api::V1::UsersController < ApplicationController
 
     puts(user.email)
 
-    if(user.save)
-      render json: user
-    else
-      render :json => {"description": "Cannot save user"}
+    # Handle exception in database
+    begin
+      user.save
+    rescue ActiveRecord::RecordNotUnique
+      render :json => "Cannot save user"
     end
+
+
       
   
   end
