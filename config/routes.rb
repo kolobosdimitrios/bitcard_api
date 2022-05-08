@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
-  # namespace :api do
-    # namespace :v1 do
-
-      resources :users      
-
-    # end
-  # end
+  namespace :api do
+    namespace :v1 do
+      get 'users/new'
+      post 'users/create'
+      get 'users/update'
+      get 'users/edit'
+      get 'users/destroy'
+      get 'users/index'
+      get 'users/show'
+    end
+  end
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm
 end
