@@ -41,3 +41,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "lockbox", "~> 0.6.8"
 
 gem "blind_index", "~> 2.3"
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
+end

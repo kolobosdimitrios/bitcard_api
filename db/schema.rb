@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 2022_05_26_181612) do
     t.decimal "price"
     t.datetime "time"
     t.string "pay_method", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,4 +40,5 @@ ActiveRecord::Schema.define(version: 2022_05_26_181612) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "purchases", "users"
 end

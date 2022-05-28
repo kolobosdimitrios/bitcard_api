@@ -69,6 +69,12 @@ GEM
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     erubi (1.10.0)
+    factory_girl (4.9.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.9.0)
+      factory_girl (~> 4.9.0)
+      railties (>= 3.0.0)
+    ffaker (2.21.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -158,6 +164,8 @@ DEPENDENCIES
   blind_index (~> 2.3)
   bootsnap (>= 1.4.2)
   byebug
+  factory_girl_rails
+  ffaker
   jbuilder (~> 2.7)
   lockbox (~> 0.6.8)
   pg (>= 0.18, < 2.0)
