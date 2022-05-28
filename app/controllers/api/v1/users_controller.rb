@@ -50,7 +50,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_id_param
-    params.permit(:user_id)
+    params.require(:user).permit(:user_id)
   end
 
   def errorResponse(data = [])
