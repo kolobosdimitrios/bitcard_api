@@ -26,7 +26,8 @@ class Api::V1::PurchasesController < ApplicationController
     puts user_id_param
     begin
       user = User.find_by!(user_id_param)
-      successResponse user.purchases
+      purchases = Purchase.where(user_id: user.id)
+      successResponse purchases
     rescue ActiveRecord::RecordNotFound
       errorResponse
     end
