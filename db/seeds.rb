@@ -8,10 +8,12 @@
 
 User.destroy_all
 Purchase.destroy_all
+Product.destroy_all
 
 FactoryGirl.create_list(:user, 100)
 
 User.all.each do |user|
+    10.times do
         user.purchases.create(
             price: FFaker::Number.decimal,
             time: FFaker::Time.datetime,
@@ -20,4 +22,21 @@ User.all.each do |user|
             created_at: FFaker::Time.datetime,
             updated_at: FFaker::Time.datetime,
         )
+    end
+
+end
+
+Purchase.all.each do |purchase|
+    5.times do
+        purchase.products.create(
+            name: FFaker::Product.product_name,
+            value: FFaker::Number.decimal,
+            description: FFaker::Lorem.paragraph,
+            code: FFaker::Lorem.characters,
+            barcode: FFaker::Lorem.characters,
+            purchase_id: purchase.id,
+            created_at: FFaker::Time.datetime,
+            updated_at: FFaker::Time.datetime
+        )
+    end
 end

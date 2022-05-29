@@ -7,7 +7,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.text :description, :null => false
       t.string :code, :null => false
       t.string :barcode, :null => false
-      t.belongs_to :purchase, foreign_key: true, index: {:unique => true}
+      t.belongs_to :purchase, foreign_key: true, index: {:unique => false}
       t.timestamps
     end
   end

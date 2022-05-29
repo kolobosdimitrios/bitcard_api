@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2022_05_29_113358) do
     t.bigint "purchase_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["purchase_id"], name: "index_products_on_purchase_id", unique: true
+    t.index ["purchase_id"], name: "index_products_on_purchase_id"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2022_05_29_113358) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_purchases_on_user_id", unique: true
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
