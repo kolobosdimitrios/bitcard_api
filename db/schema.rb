@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_26_181612) do
+ActiveRecord::Schema.define(version: 2022_05_29_113358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "products", force: :cascade do |t|
+    t.string "name", null: false
+    t.decimal "value"
+    t.text "description", null: false
+    t.string "code", null: false
+    t.string "barcode", null: false
+    t.bigint "purchase_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["purchase_id"], name: "index_products_on_purchase_id", unique: true
+  end
 
   create_table "purchases", force: :cascade do |t|
     t.decimal "price"
@@ -22,7 +34,7 @@ ActiveRecord::Schema.define(version: 2022_05_26_181612) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_purchases_on_user_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,5 +52,6 @@ ActiveRecord::Schema.define(version: 2022_05_26_181612) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "products", "purchases"
   add_foreign_key "purchases", "users"
 end
