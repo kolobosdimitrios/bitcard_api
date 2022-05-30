@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      get 'shops/create'
+      get 'shops/index'
+      get 'shops/show'
+      get 'shops/destroy'
+    end
+  end
+  namespace :api do
+    namespace :v1 do
       post 'products/create'
       get 'products/index'
       get 'products/show'
