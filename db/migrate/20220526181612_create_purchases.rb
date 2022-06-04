@@ -5,9 +5,8 @@ class CreatePurchases < ActiveRecord::Migration[6.0]
       t.decimal :price
       t.datetime :time
       t.string :pay_method, :null => false
-      t.belongs_to :user, foreign_key: true, index: {:unique => false}
-      
-
+      t.belongs_to :user, foreign_key: true, index: {:unique => false}      
+      t.references :shop, index: true
       t.timestamps
     end
   end
