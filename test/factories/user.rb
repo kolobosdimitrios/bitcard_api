@@ -7,6 +7,8 @@ FactoryGirl.define do
         date_of_birth {FFaker::Time.date}
         address {FFaker::AddressGR.street_address}
         email {FFaker::Internet.email}
+        password {FFaker::Lorem.characters}
+        password_digest = BCrypt::Password.create('test')
         created_at {FFaker::Time.datetime}
         updated_at {FFaker::Time.datetime}
 
