@@ -17,9 +17,6 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
-  password: dimitrios@home
-  port: 5433
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -84,3 +81,5 @@ test:
 production:
   <<: *default
   database: bitcard_api_app_production
+  username: postgres
+  password: dimitrios@home
