@@ -9,12 +9,14 @@ class Api::V1::UsersController < ApplicationController
 
     # Handle exception in database
     begin
-      user.save
-      successResponse
+      if user && user.save
+        successResponse
+        session[:user_id] = user.user_id  
+      end
     rescue ActiveRecord::RecordNotUnique
-      errorResponse
+      errorResponse [], "user already exists"
     rescue ActiveRecord::NotNullViolation
-      errorResponse
+      errorResponse [], "null values are not permitted"
     end
   
   end
@@ -22,13 +24,17 @@ class Api::V1::UsersController < ApplicationController
   def update
   end
 
-  def show_with_id
+  def login
     puts user_id_param
     begin
       user = User.find_by!(user_id_param)
-      successResponse user
+      if user
+        session[:user_id] = user.user_id  
+        puts "session created"
+        successResponse user
+      end 
     rescue ActiveRecord::RecordNotFound
-      errorResponse
+      errorResponse [], "user with the given id not found"
     end
   end
 
@@ -36,10 +42,17 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
+     
+  end
+
+  def logout
+    puts session[:user_id]
+    session[:user_id] = nil
+    successResponse
+    puts "session destroyed!"  
   end
 
   def index
-
   end
 
   def show
@@ -53,10 +66,10 @@ class Api::V1::UsersController < ApplicationController
     params.permit(:user_id)
   end
 
-  def errorResponse(data = [])
+  def errorResponse(data = [], description = "error", status_code = -1)
     render json: {
-      "status_code": -1,
-      "description": "Error while saving-creating user",
+      "status_code": status_code,
+      "description": description,
       "data": data
     }
   end
