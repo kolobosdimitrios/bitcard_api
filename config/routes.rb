@@ -2,10 +2,7 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      get 'tokens/new'
       get 'tokens/create'
-      get 'tokens/update'
-      get 'tokens/index'
       get 'tokens/destroy'
     end
   end

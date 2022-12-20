@@ -1,49 +1,49 @@
 class Api::V1::TokensController < ApplicationController
 
-  def new
-  end
-
   def create
-    row = Token.find_by!(fetch_user_id)
-    if row
-      render_JSON -2, "token for user already exists", [] #ignore and use current token
+    row = Token.where(user_id: params[:user_id]).first
+    if row #if exists then update
+      update row
     else
-      token = Token.create(user_id: user_id, token: generate_token)
+      token = Token.create()
+      token.user_id = params[:user_id]
+      token.token = generate_token
+      token.created_at = Time.now
+      token.updated_at = Time.now
+      puts "token is"
+      puts token.user_id
+      puts token.token
+      puts token.created_at
+      puts token.updated_at
+      # begin
       if token.save
-        render_JSON 1, "token created successfully", new_token.token #return the token
-      else
-        render_JSON -1, "token cannot be created", [] #return error 
-      end
+        puts "token_saved"
+        render_JSON 1, "token created successfully", {
+          "token": token.token,
+          "created_at": token.created_at,
+          "updated_at": token.updated_at
+        }
+      end 
     end
-  end
-
-  def update #update users token
-    current_token_row = Token.find_by!(fetch_user_id)
-    if current_token
-      puts "token exists updating..."
-      new_token = generate_token
-      current_token_row.token = new_token
-      if current_token_row.save
-        render_JSON 1, "token updated successfully", current_token_row.token #return the token
-      else
-        render_JSON -1, "token cannot be updated", [] #return error 
-      end
-    else
-      render_JSON -2, "token for user not exists", [] #ignore and use current token
-    end
-
   end
 
   def index
-    token = Token.find_by!(fetch_user_id)
-    if token
-      render_JSON 1, "token exists", token
-    else
-      render_JSON -1, "token for given user id not found", []
-    end
   end
 
-  def destroy
+  def update (token)#update users token
+    puts "token exists updating..."
+    new_token = generate_token
+    token.token = new_token
+    token.updated_at = Time.now.to_i
+    if token.save
+      render_JSON 1, "token updated successfully", {
+        "token": current_token_row.token,
+        "created_at": current_token_row.created_at,
+        "updated_at": current_token_row.updated_at
+      } #return the token
+    else
+      render_JSON -1, "token cannot be updated", [] #return error 
+    end
   end
 
   def fetch_user_id
@@ -60,7 +60,8 @@ class Api::V1::TokensController < ApplicationController
 
   def generate_token
     t = SecureRandom.hex(256)
-    puts t
     return t
   end
+
+
 end

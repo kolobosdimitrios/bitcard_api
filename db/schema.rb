@@ -51,10 +51,11 @@ ActiveRecord::Schema.define(version: 2022_12_19_184411) do
   end
 
   create_table "tokens", force: :cascade do |t|
-    t.string "user_id"
-    t.string "token"
+    t.string "token", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tokens_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,4 +75,5 @@ ActiveRecord::Schema.define(version: 2022_12_19_184411) do
 
   add_foreign_key "products", "purchases"
   add_foreign_key "purchases", "users"
+  add_foreign_key "tokens", "users"
 end
