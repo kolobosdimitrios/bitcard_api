@@ -34,12 +34,12 @@ class Api::V1::TokensController < ApplicationController
     puts "token exists updating..."
     new_token = generate_token
     token.token = new_token
-    token.updated_at = Time.now.to_i
+    token.updated_at = Time.now
     if token.save
       render_JSON 1, "token updated successfully", {
-        "token": current_token_row.token,
-        "created_at": current_token_row.created_at,
-        "updated_at": current_token_row.updated_at
+        "token": token.token,
+        "created_at": token.created_at,
+        "updated_at": token.updated_at
       } #return the token
     else
       render_JSON -1, "token cannot be updated", [] #return error 
