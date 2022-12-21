@@ -3,18 +3,22 @@ class Api::V1::TokensController < ApplicationController
   def create
     row = Token.where(user_id: params[:user_id]).first
     if row #if exists then update
-      update row
+      if (Time.now - row.created_at) < 30.minutes
+        update row
+      else
+        puts "no need for update right now aborting..."
+        render_JSON 1, "token created successfully", {
+          "token": row.token,
+          "created_at": row.created_at,
+          "updated_at": row.updated_at
+        }
+      end
     else
       token = Token.create()
       token.user_id = params[:user_id]
       token.token = generate_token
       token.created_at = Time.now
       token.updated_at = Time.now
-      puts "token is"
-      puts token.user_id
-      puts token.token
-      puts token.created_at
-      puts token.updated_at
       # begin
       if token.save
         puts "token_saved"
