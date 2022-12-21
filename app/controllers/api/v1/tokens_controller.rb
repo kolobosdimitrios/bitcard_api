@@ -39,7 +39,7 @@ class Api::V1::TokensController < ApplicationController
     new_token = generate_token
     token.token = new_token
     token.updated_at = Time.now
-    if token.save
+    if token.update
       render_JSON 1, "token updated successfully", {
         "token": token.token,
         "created_at": token.created_at,

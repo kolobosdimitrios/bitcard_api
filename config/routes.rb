@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
-      get 'tokens/create'
-      get 'tokens/destroy'
+      resources :tokens do
+        resources :products
+      end
     end
   end
   namespace :api do
@@ -22,14 +23,14 @@ Rails.application.routes.draw do
       get 'products/destroy'
     end
   end
-  namespace :api do
-    namespace :v1 do
-      post 'purchases/create'
-      get 'purchases/index'
-      get 'purchases/show'
-      get 'purchases/destroy'
-    end
-  end
+  # namespace :api do
+  #   namespace :v1 do
+  #     post 'purchases/create'
+  #     get 'purchases/index'
+  #     get 'purchases/show'
+  #     get 'purchases/destroy'
+  #   end
+  # end
   namespace :api do
     namespace :v1 do
       get 'users/new'
