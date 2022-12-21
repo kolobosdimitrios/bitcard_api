@@ -3,15 +3,12 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)   
-
-    puts(user.email)
-
+    @user = User.new(user_params)   
     # Handle exception in database
     begin
-      if user && user.save
+      if @user && @user.save
         successResponse
-        session[:user_id] = user.user_id  
+        session[:user_id] = @user.user_id  
       end
     rescue ActiveRecord::RecordNotUnique
       errorResponse [], "user already exists"
@@ -25,13 +22,12 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def login
-    puts user_id_param
     begin
-      user = User.find_by!(user_id_param)
-      if user
-        session[:user_id] = user.user_id  
+      @user = User.find_by!(user_id_param)
+      if @user
+        session[:user_id] = @user.user_id  
         puts "session created"
-        successResponse user
+        successResponse @user
       end 
     rescue ActiveRecord::RecordNotFound
       errorResponse [], "user with the given id not found"
