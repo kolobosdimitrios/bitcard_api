@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       post 'users/login', to: 'users#login' 
-      get 'users/logout', to: 'users#logout'
+      post 'users/logout', to: 'users#logout'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm

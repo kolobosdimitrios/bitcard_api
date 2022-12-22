@@ -55,6 +55,7 @@ class Api::V1::UsersController < ApplicationController
         puts "user found"
         session[:user_id] = user.id   
         puts "session created"
+        puts session[:user_id]
         redirect_to action: "show", id: user.id
       end 
     rescue ActiveRecord::RecordNotFound
@@ -63,7 +64,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def logout
-    puts session[:user_key]
     session[:user_key] = nil
     successResponse
     puts "session destroyed!"  
