@@ -18,7 +18,7 @@ User.all.each do |user|
             price: FFaker::Number.decimal,
             time: FFaker::Time.datetime,
             pay_method: "cash",
-            user_id: user.user_id,
+            user_key: user.user_id,
             created_at: FFaker::Time.datetime,
             updated_at: FFaker::Time.datetime,
         )
