@@ -1,3 +1,3 @@
 class Shop < ApplicationRecord
-    has_many :purchases, dependent: :destroy
+    has_many :purchases
 end
