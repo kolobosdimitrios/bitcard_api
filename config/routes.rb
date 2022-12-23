@@ -24,19 +24,27 @@ Rails.application.routes.draw do
       get 'products/destroy'
     end
   end
-  namespace :api do
-    namespace :v1 do
-      post 'purchases/create'
-      get 'purchases/index'
-      get 'purchases/show'
-      get 'purchases/destroy'
-    end
-  end
+  # namespace :api do
+  #   namespace :v1 do
+  #     post 'purchases/create'
+  #     get 'purchases/index'
+  #     get 'purchases/show'
+  #     get 'purchases/destroy'
+  #   end
+  # end
   namespace :api do
     namespace :v1 do
       resources :users
       post 'users/login', to: 'users#login' 
       post 'users/logout', to: 'users#logout'
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :tokens, only: [:show] do
+        resources :purchases
+      end
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm
