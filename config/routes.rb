@@ -4,8 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       #create and destroy tokens for a unique users
       resources :users , only: [:show] do
-        get 'tokens/create'
-        get 'tokens/destroy'
+        get 'tokens/get'
       end
     end
   end
