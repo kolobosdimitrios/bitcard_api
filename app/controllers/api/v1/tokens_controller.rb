@@ -10,7 +10,8 @@ class Api::V1::TokensController < ApplicationController
         render_JSON 1, "token created successfully", {
           "token": row.token,
           "created_at": row.created_at,
-          "updated_at": row.updated_at
+          "updated_at": row.updated_at,
+          "id": row.id
         }
       end
     else
@@ -25,13 +26,18 @@ class Api::V1::TokensController < ApplicationController
         render_JSON 1, "token created successfully", {
           "token": token.token,
           "created_at": token.created_at,
-          "updated_at": token.updated_at
+          "updated_at": token.updated_at,
+          "id": token.id
         }
       end 
     end
   end
 
   def index
+    rows = Token.where(user_id: params[:user_id])
+    if rows
+      render json: rows
+    end
   end
 
   def create_new (token)#create new users token
@@ -43,7 +49,8 @@ class Api::V1::TokensController < ApplicationController
       render_JSON 1, "token updated successfully", {
         "token": new_token.token,
         "created_at": new_token.created_at,
-        "updated_at": new_token.updated_at
+        "updated_at": new_token.updated_at,
+        "id": new_token.id
       } #return the token
     else
       render_JSON -1, "token cannot be updated", [] #return error 

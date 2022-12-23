@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-    has_one :token, dependent: :destroy
+    has_many :token, dependent: :destroy
 end
