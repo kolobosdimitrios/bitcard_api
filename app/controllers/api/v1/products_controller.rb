@@ -14,13 +14,23 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def index
+    user = User.find(params[:user_id])
+    if user
+      token = Token.find(params[:token_id])
+      if token && token.user_id = token.id
+        purchase = Purchase.find(params[:purchase_id])
+        @products = Product.where(id: purchase.products_id)
+        if @products
+          render json: @products
+        end
+      end
+    end
   end
 
   def show
 
-    puts require_purchase_id
     begin
-      products = Product.where(purchase_id: require_purchase_id[:purchase_id])
+      products = Product.where(purchase_id: require_purchase_id)
       successResponse products
     rescue ActiveRecord::RecordNotFound
       errorResponse

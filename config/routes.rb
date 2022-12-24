@@ -5,7 +5,9 @@ Rails.application.routes.draw do
       #create and destroy tokens for a unique users
       resources :users , only: [:show] do
         resources :tokens, only: [:index, :show] do
-          resources :purchases, only: [:index]
+          resources :purchases, only: [:index] do
+            resources :products, only: [:index]
+          end
         end
         get 'tokens/get'
       end
