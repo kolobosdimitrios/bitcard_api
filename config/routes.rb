@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       #create and destroy tokens for a unique users
       resources :users , only: [:show] do
-        resources :tokens, only: [:index]
+        resources :tokens, only: [:index, :show] do
+          resources :purchases, only: [:index]
+        end
         get 'tokens/get'
       end
     end
@@ -38,11 +40,6 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
-    namespace :v1 do
-      resources :tokens, only: [:show] do
-      end
-    end
-  end
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm
 end

@@ -18,10 +18,15 @@ class Api::V1::PurchasesController < ApplicationController
   end
 
   def index
-
-    @purchases = Purchase.where(token_id: params[:token_id])
-    if @purchases
-      render json: @purchases
+    user = User.find(params[:user_id])
+    if user
+      token = Token.find(params[:token_id])
+      if token && token.user_id = token.id
+        @purchases = Purchase.where(tokens_id: token.id)
+        if @purchases
+          render json: @purchases
+        end
+      end
     end
   end
 

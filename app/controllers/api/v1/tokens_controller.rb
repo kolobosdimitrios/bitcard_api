@@ -33,6 +33,15 @@ class Api::V1::TokensController < ApplicationController
     end
   end
 
+  def show
+    @token = Token.find(params[:id])
+    if @token
+      render_JSON 1, "Token with id found", @token
+    else
+      render_JSON -1, "Token with id not found", []
+    end
+  end
+
   def index
     rows = Token.where(user_id: params[:user_id])
     if rows
