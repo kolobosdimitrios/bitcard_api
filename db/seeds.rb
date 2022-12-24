@@ -6,37 +6,48 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.destroy_all
-Purchase.destroy_all
-Product.destroy_all
+# User.destroy_all 
+# Purchase.destroy_all
+# Product.destroy_all
+# Shop.destroy_all
 
-FactoryGirl.create_list(:user, 100)
 
-User.all.each do |user|
-    10.times do
-        user.purchases.create(
-            price: FFaker::Number.decimal,
-            time: FFaker::Time.datetime,
-            pay_method: "cash",
-            user_key: user.user_id,
-            created_at: FFaker::Time.datetime,
-            updated_at: FFaker::Time.datetime,
-        )
-    end
+# shop = Shop.create(
+#     shop_name: 'Test Shop',
+#       location_name: "Test location Name",
+#        location_latitude: 23.456578464,
+#         location_longitude: 23.456578464,
+#          description: "This is a test description",
+#           location_address: "Test location adress"
+#         )
 
-end
+# Product.create(name: "Products name", value: 10.10, description: "Product description", code: "5201478963521", barcode: "5201478963521", shops_id: shop.id)
 
-Purchase.all.each do |purchase|
-    5.times do
-        purchase.products.create(
-            name: FFaker::Product.product_name,
-            value: FFaker::Number.decimal,
-            description: FFaker::Lorem.paragraph,
-            code: FFaker::Lorem.characters,
-            barcode: FFaker::Lorem.characters,
-            purchase_id: purchase.id,
-            created_at: FFaker::Time.datetime,
-            updated_at: FFaker::Time.datetime
-        )
-    end
-end
+# User.all.each do |user|
+#     10.times do
+#         user.purchases.create(
+#             price: FFaker::Number.decimal,
+#             time: FFaker::Time.datetime,
+#             pay_method: "cash",
+#             user_key: user.user_id,
+#             created_at: FFaker::Time.datetime,
+#             updated_at: FFaker::Time.datetime,
+#         )
+#     end
+
+# end
+
+# Purchase.all.each do |purchase|
+#     5.times do
+#         purchase.products.create(
+#             name: FFaker::Product.product_name,
+#             value: FFaker::Number.decimal,
+#             description: FFaker::Lorem.paragraph,
+#             code: FFaker::Lorem.characters,
+#             barcode: FFaker::Lorem.characters,
+#             purchase_id: purchase.id,
+#             created_at: FFaker::Time.datetime,
+#             updated_at: FFaker::Time.datetime
+#         )
+#     end
+# end
