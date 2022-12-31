@@ -9,7 +9,7 @@ Rails.application.routes.draw do
             resources :products, only: [:index]
           end
         end
-        get 'tokens/get'
+        get 'tokens_get', to: 'tokens#get'
       end
     end
   end
