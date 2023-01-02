@@ -17,11 +17,13 @@ class Api::V1::ProductsController < ApplicationController
     user = User.find(params[:user_id])
     if user
       token = Token.find(params[:token_id])
-      if token && token.user_id = token.id
+      if token 
         purchase = Purchase.find(params[:purchase_id])
-        @products = Product.where(id: purchase.products_id)
-        if @products
-          render json: @products
+        if token.id === purchase.tokens_id
+          @products = Product.where(id: purchase.products_id)
+          if @products
+            render json: @products
+          end
         end
       end
     end
