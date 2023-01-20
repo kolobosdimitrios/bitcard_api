@@ -37,8 +37,19 @@ class Api::V1::UsersController < ApplicationController
   
   end
 
+  
   def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      # handle a successful update, such as redirecting to a show page
+      successResponse
+    else
+      # handle a failed update, such as rendering the edit page again
+      errorResponse [], "user with the given id not found"
+    end
   end
+    
+  
 
   def destroy
     @user = User.find(params[:id])
@@ -70,12 +81,13 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :surname, :username, :user_key, :date_of_birth, :address, :email)
+    params.require(:user).permit(:id, :name, :surname, :username, :user_key, :date_of_birth, :address, :email, :image)
   end
 
   def user_key_param
     params.permit(:user_key)
   end
+
 
   def errorResponse(data = [], description = "error", status_code = -1)
     render json: {
