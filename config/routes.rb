@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   
+  get 'coupons/index'
+  get 'coupons/show'
+  get 'coupons/create'
+  get 'coupons/delete'
+  get 'coupons/update'
   namespace :api do
     namespace :v1 do
       #create and destroy tokens for a unique users
