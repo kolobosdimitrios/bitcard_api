@@ -1,4 +1,5 @@
-class CouponsController < ApplicationController
+class Api::V1::CouponsController < ApplicationController
+  
   def index
   end
 
@@ -8,7 +9,7 @@ class CouponsController < ApplicationController
   def create
   end
 
-  def delete
+  def destroy
   end
 
   def update
