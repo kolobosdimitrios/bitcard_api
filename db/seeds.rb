@@ -40,18 +40,16 @@ require_relative '../lib/populator_fix.rb'
     
 # end
 
-Token.destroy_all
-5.times do 
-    tkn = Token.create(token: Faker::Code.ean, user_id: 1)
-    rand(1..15).times do
-        shop = Shop.all.sample
-        products = Product.all.select {|p| p.shops_id == shop.id }
-        p = products.sample
-        purchase = Purchase.create(tokens_id: tkn.id, shops_id: shop.id, products_id: p.id)
-        puts  tkn.id.to_s 
-        puts "-----"
-    end
-end
+# Token.destroy_all
+# 5.times do 
+#     tkn = Token.create(token: Faker::Code.ean, user_id: 1)
+#     rand(1..15).times do
+#         shop = Shop.all.sample
+#         products = Product.all.select {|p| p.shops_id == shop.id }
+#         p = products.sample
+#         purchase = Purchase.create(tokens_id: tkn.id, shops_id: shop.id, products_id: p.id)
+#     end
+# end
 
 
 
