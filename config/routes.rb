@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :users , only: [:show] do
         resources :tokens, only: [:index, :show] do
           resources :purchases, only: [:index] do
-            resources :products, only: [:index]
+            get 'get_users_products', to: 'products#index_user_products'
           end
         end
         get 'tokens_get', to: 'tokens#get'
@@ -20,16 +20,13 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :shops do
         # resources :purchases, only: [:create]
-        resources :products
+        get 'get_shop_products', to: 'products#index_shop_products'
       end
     end
   end
   namespace :api do
     namespace :v1 do
-      post 'products/create'
-      get 'products/index'
-      get 'products/show'
-      get 'products/destroy'
+      resources :products
     end
   end
   namespace :api do
@@ -45,11 +42,11 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
-    namespace :v1 do
-      resources :shops      
-    end
-  end
+  # namespace :api do
+  #   namespace :v1 do
+  #     resources :shops      
+  #   end
+  # end
 
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm

@@ -1,7 +1,6 @@
 class Api::V1::ProductsController < ApplicationController
   def create
     product = Product.new(require_product_params)
-
     begin
       product.save
       render successResponse product
@@ -12,8 +11,9 @@ class Api::V1::ProductsController < ApplicationController
     end
 
   end
-
-  def index
+  
+  #find and index user's products
+  def index_user_products 
     user = User.find(params[:user_id])
     if user
       token = Token.find(params[:token_id])
@@ -29,10 +29,22 @@ class Api::V1::ProductsController < ApplicationController
     end
   end
 
+  #index all products
+  def index
+    @products = Product.all
+    render json: @products
+  end
+
+  #find shop's products
+  def index_shop_products
+    @products = Product.where(shops_id: params[:shops_id])
+    render json: @products
+  end
+
   def show
 
     begin
-      products = Product.where(purchase_id: require_purchase_id)
+      products = Product.find(params[:id])
       successResponse products
     rescue ActiveRecord::RecordNotFound
       errorResponse
