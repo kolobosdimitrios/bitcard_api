@@ -72,6 +72,7 @@ class Api::V1::UsersController < ApplicationController
         # coupons << c
       end
       @user.points = remaining_points
+      @user.remaining_points = 300 - @user.points
       if @user.save
         successResponse @user
       else
