@@ -11,8 +11,8 @@ Rails.application.routes.draw do
             get 'get_users_products', to: 'products#index_user_products'
           end
         end
+        resources :coupons, only: [:index, :show, :update, :destroy]
         get 'tokens_get', to: 'tokens#get'
-        resources :coupons
       end
     end
   end
@@ -39,8 +39,10 @@ Rails.application.routes.draw do
       resources :users
       post 'users/login', to: 'users#login' 
       post 'users/logout', to: 'users#logout'
+      post 'users/update_points', to: 'users#update_user_points'
     end
   end
+
 
   # namespace :api do
   #   namespace :v1 do

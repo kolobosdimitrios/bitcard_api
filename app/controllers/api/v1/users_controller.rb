@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+
   def new
   end
 
@@ -48,6 +49,38 @@ class Api::V1::UsersController < ApplicationController
       errorResponse [], "user with the given id not found"
     end
   end
+
+  def update_user_points
+    @user = User.find(update_user_points_params[:id])
+    if @user
+      current_points = @user.points
+      puts "user current points : " + current_points.to_s
+      new_points = current_points + update_user_points_params[:points]
+      puts "user new pooints "
+      new_coupons_number = new_points.div(300) 
+      remaining_points = new_points%300
+      #create new coupons
+      # coupons = []
+      for index in 1..new_coupons_number
+        c = Coupon.create(
+          value: 3,
+          code: SecureRandom.alphanumeric(16),
+          redeemed: 0,
+          user_id: update_user_points_params[:id]
+        )
+        c.save()
+        # coupons << c
+      end
+      @user.points = remaining_points
+      if @user.save
+        successResponse @user
+      else
+        errorResponse [], "cannot update user points"
+      end
+    else
+      errorResponse [], "user with given id not found"
+    end
+  end
     
   
 
@@ -86,6 +119,10 @@ class Api::V1::UsersController < ApplicationController
 
   def user_key_param
     params.permit(:user_key)
+  end
+
+  def update_user_points_params
+    params.permit(:id, :points)
   end
 
 
