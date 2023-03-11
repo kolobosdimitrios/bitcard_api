@@ -59,6 +59,6 @@ class Api::V1::ShopsController < ApplicationController
   end
 
   def shop_params
-    params.require(:shop).permit(:shop_name, :location_name, :location_latitude, :location_longitude,:description, :location_address, :working_hours)
+    params.require(:shop).permit(:shop_name, :location_name, :location_latitude, :location_longitude,:description, :location_address, :working_hours, :contact_info)
   end
 end

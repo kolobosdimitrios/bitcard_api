@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_11_122357) do
+ActiveRecord::Schema.define(version: 2023_03_11_122711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2023_03_11_122357) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "working_hours", default: "{}"
+    t.string "contact_info", default: "{}"
   end
 
   create_table "tokens", force: :cascade do |t|
