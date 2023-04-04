@@ -6,9 +6,15 @@ Rails.application.routes.draw do
     namespace :v1 do
       #create and destroy tokens for a unique users
       resources :users , only: [:show] do
-        resources :tokens, only: [:index, :show]
+        resources :tokens, only: [:index]
+        resources :token, only: [:show] do
+          resources :purchases, only: [:show] do
+            get 'index_user_products', to: 'products#index_user_products'
+          end
+        end
         get 'index_users_purchases', to: 'purchases#index_users_purchases'
-        resources :purchases, only: [:index, :show]
+        resources :purchases, only: [:index]
+        
         resources :coupons, only: [:index, :show, :update, :destroy]
         get 'tokens_get', to: 'tokens#get'
       end

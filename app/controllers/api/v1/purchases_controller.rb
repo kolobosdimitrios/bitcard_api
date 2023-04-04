@@ -21,12 +21,9 @@ class Api::V1::PurchasesController < ApplicationController
     user = User.find(params[:user_id])
     if user
       tokens = user.token
-      @purchases = []
-      tokens.each do |token| 
-        @purchases << Purchase.where(tokens_id: token.id).first
-      end
+      @purchases = Purchase.where(tokens_id: tokens.ids)
       if @purchases
-          render json: @purchases.compact
+          render json: @purchases
       end
     end
   end
