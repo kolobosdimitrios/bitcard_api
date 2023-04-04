@@ -6,14 +6,13 @@ Rails.application.routes.draw do
     namespace :v1 do
       #create and destroy tokens for a unique users
       resources :users , only: [:show] do
-        resources :tokens, only: [:index, :show] do
-          resources :purchases, only: [:index] do
-            get 'get_users_products', to: 'products#index_user_products'
-          end
-        end
+        resources :tokens, only: [:index, :show]
+        get 'index_users_purchases', to: 'purchases#index_users_purchases'
+        resources :purchases, only: [:index, :show]
         resources :coupons, only: [:index, :show, :update, :destroy]
         get 'tokens_get', to: 'tokens#get'
       end
+      resources :purchases, only: [:index, :show]
     end
   end
   namespace :api do
@@ -27,11 +26,6 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :products
-    end
-  end
-  namespace :api do
-    namespace :v1 do
-     resources :purchases
     end
   end
   namespace :api do
