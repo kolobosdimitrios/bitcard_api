@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_11_122711) do
+ActiveRecord::Schema.define(version: 2023_04_07_154940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,13 +39,20 @@ ActiveRecord::Schema.define(version: 2023_03_11_122711) do
     t.index ["shops_id"], name: "index_products_on_shops_id"
   end
 
+  create_table "purchase_products", force: :cascade do |t|
+    t.bigint "products_id", null: false
+    t.bigint "purchases_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["products_id"], name: "index_purchase_products_on_products_id"
+    t.index ["purchases_id"], name: "index_purchase_products_on_purchases_id"
+  end
+
   create_table "purchases", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "tokens_id"
-    t.bigint "products_id"
     t.bigint "shops_id"
-    t.index ["products_id"], name: "index_purchases_on_products_id"
     t.index ["shops_id"], name: "index_purchases_on_shops_id"
     t.index ["tokens_id"], name: "index_purchases_on_tokens_id"
   end
@@ -91,7 +98,8 @@ ActiveRecord::Schema.define(version: 2023_03_11_122711) do
 
   add_foreign_key "coupons", "users"
   add_foreign_key "products", "shops", column: "shops_id"
-  add_foreign_key "purchases", "products", column: "products_id"
+  add_foreign_key "purchase_products", "products", column: "products_id"
+  add_foreign_key "purchase_products", "purchases", column: "purchases_id"
   add_foreign_key "purchases", "shops", column: "shops_id"
   add_foreign_key "purchases", "tokens", column: "tokens_id"
   add_foreign_key "tokens", "users"
