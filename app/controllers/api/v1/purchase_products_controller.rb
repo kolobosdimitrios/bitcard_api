@@ -6,14 +6,15 @@ class Api::V1::PurchaseProductsController < ApplicationController
   
   def create
     purchases = get_purchase_products_params
-    Name.create(purchases.map { |purchase| { purchase: purchase } })
+    PurchaseProduct.create(purchases.map { |purchase| { purchase: purchase } })
   end
 
   def index
-    purchase = Purchase.find(params[:purchase_id])
-    if purchase
-      @purchase_products = purchase.purchase_products
-      render json: @purchase_products
+    @purchase_products = PurchaseProduct.where(purchases_id: params[:purchase_id])
+    if @purchase_products
+      products_ids = @purchase_products.pluck(:products_id)
+      products = Product.where(id: products_ids)
+      render json: products
     end
   end
 

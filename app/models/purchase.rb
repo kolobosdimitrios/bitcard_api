@@ -1,4 +1,5 @@
 class Purchase < ApplicationRecord
-    belongs_to :tokens
-    has_many :purchase_products
+    belongs_to :tokens, dependent: :destroy
+    has_many :purchase_products, dependent: :destroy
+    belongs_to :shop, dependent: :destroy
 end

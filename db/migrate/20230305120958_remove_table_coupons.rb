@@ -1,5 +1,5 @@
 class RemoveTableCoupons < ActiveRecord::Migration[6.0]
   def change
-    drop_table :coupons
+    # drop_table :coupons
   end
 end

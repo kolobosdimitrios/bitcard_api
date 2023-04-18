@@ -1,4 +1,4 @@
 class PurchaseProduct < ApplicationRecord
-  belongs_to :products
-  belongs_to :purchases
+  has_many :products
+  belongs_to :purchase
 end
