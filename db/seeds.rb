@@ -58,11 +58,11 @@ require_relative '../lib/populator_fix.rb'
 #     purchase.shops_id = Shop.all.sample.id
 # end
 
-PurchaseProduct.populate 1500 do |purchase_product|
-    purchase = Purchase.all.sample
-    purchase_product.purchases_id = purchase.id;
-    purchase_product.products_id = Product.where(shops_id: purchase.shops_id).all.sample
-end
+# PurchaseProduct.populate 1500 do |purchase_product|
+#     purchase = Purchase.all.sample
+#     purchase_product.purchases_id = purchase.id;
+#     purchase_product.products_id = Product.where(shops_id: purchase.shops_id).all.sample
+# end
 
-
+FavoriteShop.destroy_all
 

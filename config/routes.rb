@@ -6,6 +6,10 @@ Rails.application.routes.draw do
       #create and destroy tokens for a unique users
       resources :users , only: [:show] do
         resources :tokens, only: [:index]
+        resources :shops, only: [:show] do
+          get 'is_favorite', to: 'favorite_shops#is_users_favorite'
+          delete 'remove_relation', to: 'favorite_shops#remove_relation'
+        end
         resources :token, only: [:show] do
           resources :purchases, only: [:show] do
             get 'index_user_products', to: 'products#index_user_products'
@@ -22,7 +26,9 @@ Rails.application.routes.draw do
   end
   namespace :api do
     namespace :v1 do
-      resources :shops do
+      resources :favorite_shops
+
+      resources :shops, only: [:index] do
         # resources :purchases, only: [:create]
         get 'get_shop_products', to: 'products#index_shop_products'
       end
