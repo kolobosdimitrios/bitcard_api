@@ -42,6 +42,8 @@ gem "lockbox", "~> 0.6.8"
 
 gem "blind_index", "~> 2.3"
 
+gem 'psych', '< 4.0.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
