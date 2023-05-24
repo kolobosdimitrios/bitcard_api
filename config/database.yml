@@ -80,6 +80,8 @@ test:
 #
 production:
   <<: *default
-  database: bitcard_api_app_production
-  username: postgres
-  password: dimitrios@home
+  # database: bitcard_api_app_production
+  # username: postgres
+  # password: dimitrios@home
+  url: <%= ENV['DATABASE_URL'] %>
+
