@@ -28,43 +28,64 @@ require_relative '../lib/populator_fix.rb'
 #     points: 3000
 # )
 
-Token.populate 50 do |token|
-    token.token = Faker::Alphanumeric.alpha(number: 64);
-    token.user_id = User.all.first.id
+# Token.populate 50 do |token|
+#     token.token = Faker::Alphanumeric.alpha(number: 64);
+#     token.user_id = User.all.first.id
+# end
+
+for a in 1..15 do
+    shop = Shop.create(
+        shop_name: Faker::Company.name,
+        location_name: Faker::Address.street_address,
+        location_address: Faker::Address.street_address,
+        location_latitude: Faker::Address.latitude,
+        location_longitude: Faker::Address.longitude,
+        description: Faker::Lorem.sentence,
+    )
+    for i in 1..45 do
+        Product.create(
+            name: Faker::Appliance.brand,
+            value: Faker::Number.decimal(l_digits: 2, r_digits: 2),
+            description: Faker::Appliance.equipment,
+            code: Faker::Barcode.ean(13),
+            barcode: Faker::Alphanumeric.alphanumeric(number: 25),
+            shops_id: shop.id
+        )
+    end
+
 end
 
-Shop.populate 50 do |shop|
-    shop.shop_name = Faker::Company.name,
-    shop.location_name = Faker::Address.community,
-    shop.location_latitude = Faker::Address.latitude,
-    shop.location_longitude = Faker::Address.longitude,
-    shop.description = Faker::Lorem.sentence,
-    shop.location_address = Faker::Address.street_address
-end
+# Shop.populate 50 do |shop|
+#     shop.shop_name = Faker::Company.name,
+#     shop.location_name = Faker::Address.community,
+#     shop.location_latitude = Faker::Address.latitude,
+#     shop.location_longitude = Faker::Address.longitude,
+#     shop.description = Faker::Lorem.sentence,
+#     shop.location_address = Faker::Address.street_address
+# end
 
 
-Product.populate 15000 do |product|
-    product.name = Faker::Appliance.brand,
-    product.value = Faker::Number.decimal(l_digits: 2, r_digits: 2),
-    product.description = Faker::Appliance.equipment,
-    product.code = Faker::Barcode.ean(13) ,
-    product.barcode = Faker::Alphanumeric.alphanumeric(number: 25),
-    product.shops_id = Shop.all.sample.id
-end
+# Product.populate 15000 do |product|
+#     product.name = Faker::Appliance.brand,
+#     product.value = Faker::Number.decimal(l_digits: 2, r_digits: 2),
+#     product.description = Faker::Appliance.equipment,
+#     product.code = Faker::Barcode.ean(13) ,
+#     product.barcode = Faker::Alphanumeric.alphanumeric(number: 25),
+#     product.shops_id = Shop.all.sample.id
+# end
 
 
-Purchase.populate 30 do |purchase|
-    purchase.tokens_id = Token.all.sample.id;
-    purchase.shops_id = Shop.all.sample.id
-end
+# Purchase.populate 30 do |purchase|
+#     purchase.tokens_id = Token.all.sample.id;
+#     purchase.shops_id = Shop.all.sample.id
+# end
 
-PurchaseProduct.populate 1500 do |purchase_product|
-    purchase = Purchase.all.sample
-    purchase_product.purchases_id = purchase.id;
-    purchase_product.products_id = Product.where(shops_id: purchase.shops_id).all.sample
-end
+# PurchaseProduct.populate 1500 do |purchase_product|
+#     purchase = Purchase.all.sample
+#     purchase_product.purchases_id = purchase.id;
+#     purchase_product.products_id = Product.where(shops_id: purchase.shops_id).all.sample
+# end
 
-# FavoriteShop.destroy_all
 
 
 Shop.all.each do |shop|
