@@ -1,0 +1,12 @@
+{
+    "phones": [
+        "6900000001",
+        "6900000002",
+        "6900000003"
+    ],
+    "social_media": {
+        "instagram": "test_shop_instagram",
+        "facebook": "test_shop_facebook",
+        "twitter": "test_shop_twitter"
+    }
+}

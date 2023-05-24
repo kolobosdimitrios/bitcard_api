@@ -64,5 +64,14 @@ require_relative '../lib/populator_fix.rb'
 #     purchase_product.products_id = Product.where(shops_id: purchase.shops_id).all.sample
 # end
 
-FavoriteShop.destroy_all
+# FavoriteShop.destroy_all
+
+
+Shop.all.each do |shop|
+    working_hours = "{\"monday\":\"09:00-15:00||17:00-00:00\",\"tuesday\":\"09:00-15:00||17:00-00:00\",\"wednesday\":\"09:00-15:00||17:00-00:00\",\"thursday\":\"09:00-15:00||17:00-00:00\",\"friday\":\"09:00-15:00||17:00-00:00\",\"saturday\":\"09:00-15:00||17:00-00:00\",\"sunday\":\"-\"}"
+    contact_info = "{\"phones\":[\"6900000001\",\"6900000002\",\"6900000003\"],\"social_media\":{\"instagram\":\"test_shop_instagram\",\"facebook\":\"test_shop_facebook\",\"twitter\":\"test_shop_twitter\"}}"
+    shop.update(working_hours: working_hours, contact_info: contact_info)
+    # puts shop.contact_info.class
+end
+
 
