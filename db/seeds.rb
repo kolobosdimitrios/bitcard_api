@@ -33,46 +33,41 @@ require_relative '../lib/populator_fix.rb'
 #     token.user_id = User.all.first.id
 # end
 
-for a in 1..15 do
-    shop = Shop.create(
-        shop_name: Faker::Company.name,
-        location_name: Faker::Address.street_address,
-        location_address: Faker::Address.street_address,
-        location_latitude: Faker::Address.latitude,
-        location_longitude: Faker::Address.longitude,
-        description: Faker::Lorem.sentence,
+# for a in 1..15 do
+#     shop = Shop.create(
+#         shop_name: Faker::Company.name,
+#         location_name: Faker::Address.street_address,
+#         location_address: Faker::Address.street_address,
+#         location_latitude: Faker::Address.latitude,
+#         location_longitude: Faker::Address.longitude,
+#         description: Faker::Lorem.sentence,
+#     )
+#     for i in 1..45 do
+#         Product.create(
+#             name: Faker::Appliance.brand,
+#             value: Faker::Number.decimal(l_digits: 2, r_digits: 2),
+#             description: Faker::Appliance.equipment,
+#             code: Faker::Barcode.ean(13),
+#             barcode: Faker::Alphanumeric.alphanumeric(number: 25),
+#             shops_id: shop.id
+#         )
+#     end
+
+# end
+
+Token.all.each do |token|
+    purchase =Purchase.create(
+        tokens_id: token.id,
+        shops_id: Shop.all.sample.id
     )
-    for i in 1..45 do
-        Product.create(
-            name: Faker::Appliance.brand,
-            value: Faker::Number.decimal(l_digits: 2, r_digits: 2),
-            description: Faker::Appliance.equipment,
-            code: Faker::Barcode.ean(13),
-            barcode: Faker::Alphanumeric.alphanumeric(number: 25),
-            shops_id: shop.id
+
+    for i in 1..5 do
+        PurchaseProduct.create(
+            purchases_id: purchase.id,
+            products_id: Product.where(shops_id: purchase.shops_id).all.sample
         )
     end
-
 end
-
-# Shop.populate 50 do |shop|
-#     shop.shop_name = Faker::Company.name,
-#     shop.location_name = Faker::Address.community,
-#     shop.location_latitude = Faker::Address.latitude,
-#     shop.location_longitude = Faker::Address.longitude,
-#     shop.description = Faker::Lorem.sentence,
-#     shop.location_address = Faker::Address.street_address
-# end
-
-
-# Product.populate 15000 do |product|
-#     product.name = Faker::Appliance.brand,
-#     product.value = Faker::Number.decimal(l_digits: 2, r_digits: 2),
-#     product.description = Faker::Appliance.equipment,
-#     product.code = Faker::Barcode.ean(13) ,
-#     product.barcode = Faker::Alphanumeric.alphanumeric(number: 25),
-#     product.shops_id = Shop.all.sample.id
-# end
 
 
 # Purchase.populate 30 do |purchase|
@@ -88,10 +83,10 @@ end
 
 
 
-Shop.all.each do |shop|
-    working_hours = "{\"monday\":\"09:00-15:00||17:00-00:00\",\"tuesday\":\"09:00-15:00||17:00-00:00\",\"wednesday\":\"09:00-15:00||17:00-00:00\",\"thursday\":\"09:00-15:00||17:00-00:00\",\"friday\":\"09:00-15:00||17:00-00:00\",\"saturday\":\"09:00-15:00||17:00-00:00\",\"sunday\":\"-\"}"
-    contact_info = "{\"phones\":[\"6900000001\",\"6900000002\",\"6900000003\"],\"social_media\":{\"instagram\":\"test_shop_instagram\",\"facebook\":\"test_shop_facebook\",\"twitter\":\"test_shop_twitter\"}}"
-    shop.update(working_hours: working_hours, contact_info: contact_info)
-end
+# Shop.all.each do |shop|
+#     working_hours = "{\"monday\":\"09:00-15:00||17:00-00:00\",\"tuesday\":\"09:00-15:00||17:00-00:00\",\"wednesday\":\"09:00-15:00||17:00-00:00\",\"thursday\":\"09:00-15:00||17:00-00:00\",\"friday\":\"09:00-15:00||17:00-00:00\",\"saturday\":\"09:00-15:00||17:00-00:00\",\"sunday\":\"-\"}"
+#     contact_info = "{\"phones\":[\"6900000001\",\"6900000002\",\"6900000003\"],\"social_media\":{\"instagram\":\"test_shop_instagram\",\"facebook\":\"test_shop_facebook\",\"twitter\":\"test_shop_twitter\"}}"
+#     shop.update(working_hours: working_hours, contact_info: contact_info)
+# end
 
 
