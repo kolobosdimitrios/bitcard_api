@@ -55,9 +55,9 @@ require_relative '../lib/populator_fix.rb'
 
 # end
 
-for i in 1..5 do
+Token.all.each do |token|
     Purchase.create(
-        tokens_id: Token.all.sample.id,
+        tokens_id: token.id,
         shops_id: Shop.all.sample.id
     )
 end
