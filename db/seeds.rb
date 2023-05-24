@@ -62,14 +62,14 @@ for i in 1..5 do
     )
 end
 
-Purchase.all.each do |purchase|
-    for i in 1..5 do
-        PurchaseProduct.create(
-            purchases_id: purchase.id,
-            products_id: Product.where(shops_id: purchase.shops_id).all.sample
-        )
-    end
-end
+# Purchase.all.each do |purchase|
+#     for i in 1..5 do
+#         PurchaseProduct.create(
+#             purchases_id: purchase.id,
+#             products_id: Product.where(shops_id: purchase.shops_id).all.sample
+#         )
+#     end
+# end
 
 
 # Purchase.populate 30 do |purchase|
