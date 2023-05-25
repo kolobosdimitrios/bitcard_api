@@ -55,27 +55,27 @@ require_relative '../lib/populator_fix.rb'
 
 # end
 
-# Token.all.each do |token|
-#     Purchase.create(
-#         tokens_id: token.id,
-#         shops_id: Shop.all.sample.id
-#     )
-# end
-
-# Purchase.all.each do |purchase|
-#     for i in 1..5 do
-#         PurchaseProduct.create(
-#             purchases_id: purchase.id,
-#             products_id: Product.where(shops_id: purchase.shops_id).all.sample
-#         )
-#     end
-# end
-
-puts("Hello")
-Purchase.populate 30 do |purchase|
-    purchase.tokens_id = Token.all.sample.id;
-    purchase.shops_id = Shop.all.sample.id
+Token.all.each do |token|
+    Purchase.create(
+        tokens_id: token.id,
+        shops_id: Shop.all.sample.id
+    )
 end
+
+Purchase.all.each do |purchase|
+    for i in 1..5 do
+        PurchaseProduct.create(
+            purchases_id: purchase.id,
+            products_id: Product.where(shops_id: purchase.shops_id).all.sample
+        )
+    end
+end
+
+# puts("Hello")
+# Purchase.populate 30 do |purchase|
+#     purchase.tokens_id = Token.all.sample.id;
+#     purchase.shops_id = Shop.all.sample.id
+# end
 
 # PurchaseProduct.populate 1500 do |purchase_product|
 #     purchase = Purchase.all.sample
