@@ -1,7 +1,7 @@
 class Api::V1::PurchasesController < ApplicationController
 
   def create
-    @purchase = Purchase.new(purchase_params)
+    @purchase = Purchase.create(purchase_params)
     if @purchase.save
       render json: {
         "status_code": 1,
