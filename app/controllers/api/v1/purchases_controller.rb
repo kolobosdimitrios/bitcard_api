@@ -57,6 +57,6 @@ class Api::V1::PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.require(:purchase).permit(:tokens_id, :products_id, :shops_id)
+    params.require(:purchase).permit(:tokens_id, :shops_id)
   end
 end
