@@ -1,4 +1,4 @@
 class Token < ApplicationRecord
     belongs_to :user
-    has_many :purchases
+    # has_many :purchase
 end
