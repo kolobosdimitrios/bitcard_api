@@ -57,17 +57,21 @@ require_relative '../lib/populator_fix.rb'
 
 
 
-# puts("Hello")
-# Purchase.populate 30 do |purchase|
-#     purchase.tokens_id = Token.all.sample.id;
-#     purchase.shops_id = Shop.all.sample.id
-# end
 
-PurchaseProduct.populate 1500 do |purchase_product|
-    purchase = Purchase.all.sample
-    purchase_product.purchases_id = purchase.id;
-    purchase_product.products_id = Product.where(shops_id: purchase.shops_id).all.sample.id
+PurchaseProduct.destroy_all
+
+
+Purchase.all.each do |purchase|
+    
+    Product.where(shops_id: Shop.all.sample.id).first(15).each do |product|
+        PurchaseProduct.create!(
+            purchases_id: purchase.id,
+            products_id: product.id
+        )
+    end
+
 end
+
 
 
 
