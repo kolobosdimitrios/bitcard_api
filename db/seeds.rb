@@ -57,9 +57,21 @@ require_relative '../lib/populator_fix.rb'
 
 
 
-
+Product.destroy_all
 PurchaseProduct.destroy_all
 
+Shop.all.each do |shop|
+    for counter in 1..45 do
+        Product.create(
+            name: Faker::Appliance.brand,
+            value: Faker::Number.decimal(l_digits: 2, r_digits: 2),
+            description: Faker::Appliance.equipment,
+            code: Faker::Barcode.ean(13),
+            barcode: Faker::Alphanumeric.alphanumeric(number: 25),
+            shops_id: shop.id
+        )
+    end
+end
 
 Purchase.all.each do |purchase|
     
