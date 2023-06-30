@@ -5,8 +5,19 @@ class Api::V1::PurchaseProductsController < ApplicationController
   end
   
   def create
-    purchases = get_purchase_products_params
-    PurchaseProduct.create(purchases.map { |purchase| { purchase: purchase } })
+    @purchase_products = []
+    save_succeded = true
+    params[:purchase_products].each do |purchase_product|
+      pp = PurchaseProduct.new(get_purchase_products_params(purchase_product))
+      save_succeded = false unless pp.save
+      @purchase_products << pp
+    end
+
+    if save_succeded
+      render json: @purchase_products, status: 200
+    else
+      render json: @purchase_products.errors, status: 404
+    end
   end
 
   def index
@@ -15,6 +26,7 @@ class Api::V1::PurchaseProductsController < ApplicationController
       products_ids = @purchase_products.pluck(:products_id)
       products = Product.where(id: products_ids)
       render json: products
+    else
     end
   end
 
@@ -25,7 +37,7 @@ class Api::V1::PurchaseProductsController < ApplicationController
     end
   end
 
-  def get_purchase_products_params
-    params.reqiure(:purchase_products).permit(purchase_products: [])[:purchase_products]
+  def get_purchase_products_params(purchase_product)
+    purchase_product.permit(:purchases_id, :products_id)
   end
 end
