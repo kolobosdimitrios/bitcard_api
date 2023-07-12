@@ -65,7 +65,8 @@ class Api::V1::ProductsController < ApplicationController
       :code,
       :barcode,
       :purchase_id,
-      :points
+      :points,
+      :image
     )
   end
 
