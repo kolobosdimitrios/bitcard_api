@@ -1,9 +1,15 @@
 class Api::V1::ProductsController < ApplicationController
   def create
-    product = Product.new(require_product_params)
+    # @product = Product.create(require_product_params)
+    # if @product.save
+    #   render successResponse product
+    # else
+    #   errorResponse
+    # end
+    product = Product.create!(require_product_params)
     begin
       product.save
-      render successResponse product
+      successResponse product
     rescue ActiveRecord::RecordNotUnique
       errorResponse
     rescue ActiveRecord::NotNullViolation
@@ -58,15 +64,15 @@ class Api::V1::ProductsController < ApplicationController
 
   def require_product_params
     params.require(:product)
-    permit(
+    .permit(
       :name,
       :value,
       :description,
       :code,
       :barcode,
-      :purchase_id,
       :points,
-      :image
+      :image,
+      :shops_id
     )
   end
 
@@ -78,7 +84,7 @@ class Api::V1::ProductsController < ApplicationController
   def errorResponse(data = [])
     render json: {
       "status_code": -1,
-      "description": "Error while saving-creating user",
+      "description": "Error while saving-creating product",
       "data": data
     }
   end
