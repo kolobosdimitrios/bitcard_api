@@ -1,11 +1,6 @@
 class Api::V1::ProductsController < ApplicationController
+  
   def create
-    # @product = Product.create(require_product_params)
-    # if @product.save
-    #   render successResponse product
-    # else
-    #   errorResponse
-    # end
     product = Product.create!(require_product_params)
     begin
       product.save

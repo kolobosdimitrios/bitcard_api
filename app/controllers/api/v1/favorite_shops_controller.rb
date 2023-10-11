@@ -53,19 +53,19 @@ class Api::V1::FavoriteShopsController < ApplicationController
     end
 
     def error_response(data = [], description = "error", status_code = -1)
-    render json: {
-      "status_code": status_code,
-      "description": description,
-      "data": data
-    }
-  end
+        render json: {
+        "status_code": status_code,
+        "description": description,
+        "data": data
+        }
+    end
 
-  def success_response(data = [])
-    render json: {
-      "status_code": 1,
-      "description": "Success",
-      "data": data
-    }
-  end
+    def success_response(data = [])
+        render json: {
+        "status_code": 1,
+        "description": "Success",
+        "data": data
+        }
+    end
     
 end
